@@ -1,0 +1,23 @@
+{
+  "name": "xml-to-md",
+  "description": "The utility converts xml files of livejournal posts into markdown files for the Jekyll blog on Github.",
+  "version": "1.0.0",
+  "main": "converter.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/quillcraft/xml-to-md.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/quillcraft/xml-to-md/issues"
+  },
+  "homepage": "https://github.com/quillcraft/xml-to-md#readme",
+  "devDependencies": {
+    "@xmldom/xmldom": "^0.8.2",
+    "html-to-md": "^0.5.7"
+  }
+}
