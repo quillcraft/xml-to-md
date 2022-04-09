@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding='utf-8'?>
+<livejournal>
+<entry>
+<eventtime>2022-04-10 23:37:00</eventtime>
+<subject>Здесь заголовок поста</subject>
+<event>&lt;p&gt;Здесь текст поста.&lt;/p&gt;</event>
+</entry>
+</livejournal>
