@@ -15,16 +15,41 @@ function getMarkdown(entry) {
 	const event = entry.getElementsByTagName('event')
 	const eventNode = Array.from(event)[0]
 	const eventHTML = new XMLSerializer().serializeToString(eventNode)
-	const content = html2md(eventHTML, { skipTags: ['event'] })
 
-	return `---\nlayout: post\ntitle: "${title}"\ncategories: event\n---\n${content}`
+	const html = eventHTML
+		.replace(/&lt;/g, '<')
+		.replace(/&gt;/g, '>')
+		.replace(/&quot;/g, '"')
+		.replace(/&amp;/g, '&')
+		.replace(/&#160;/g, ' ')
+		.replace(/&#171;/g, '«')
+		.replace(/&#187;/g, '»')
+		.replace(/&#8220;/g, '“')
+		.replace(/&#8221;/g, '”')
+		.replace(/&#8222;/g, '“')
+		.replace(/&#8212;/g, '—')
+		.replace(/&#8230;/g, '…')
+		.replace(/&#169;/g, '©')
+		.replace(/http:/g, 'https:')
+		.replace(/lj-cut/g, 'div')
+		.replace(/lj user/g, 'img alt')
+		.replace(/lj-poll-/g, 'img id=')
+		.replace(/lj-embed/g, 'img id=')
+
+	const options = {
+		skipTags: ['event', 'figure', 'small', 'strike', 'span', 'sup']
+	}
+
+	const md = html2md(html, options)
+
+	return `---\nlayout: post\ntitle: "${title}"\ncategories: event\n---\n${md}`
 }
 
 function writeFile(entry) {
 	try {
 		const eventtime = entry.getElementsByTagName('eventtime')
 		const timestamp = Array.from(eventtime)[0].textContent
-		const filename = timestamp.split(' ')[0]
+		const filename = timestamp.replace(/[: ]/g, '-')
 		const md = getMarkdown(entry)
 
 		fs.writeFileSync(`${output}/${filename}.md`, md, { encoding: 'utf8' })
